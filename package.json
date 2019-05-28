@@ -1,0 +1,25 @@
+{
+  "name": "training-lit-html",
+  "version": "1.0.0",
+  "description": "Starter kit for a lit-html training",
+  "main": "index.js",
+  "scripts": {
+    "start": "lite-server -c lite-server.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/astrinxit66/training-lit-html.git"
+  },
+  "author": "Jean-Marc Rakotoarisoa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/astrinxit66/training-lit-html/issues"
+  },
+  "homepage": "https://github.com/astrinxit66/training-lit-html#readme",
+  "devDependencies": {
+    "lite-server": "2.5.3"
+  },
+  "dependencies": {
+    "lit-html": "^1.1.0"
+  }
+}
