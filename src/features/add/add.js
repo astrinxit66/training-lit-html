@@ -7,40 +7,44 @@
  */
 import {addTpl} from './add.tpl.js';
 import {render} from '../../../web_modules/lit-html.js';
-import {View} from '../view.js';
+import {dom, FeatureView, publish} from '../feature.js';
 
 let instance = null;
 
-class AddViewFeature extends View {
+export class AddViewFeature extends FeatureView {
 
-    static getInstance() {
-        return instance;
+    constructor(_$container) {
+        super(_$container);
+
+        this.$input = null;
     }
 
-    create({target: value}) {
-        console.log('Should create a new todo with message:', value);
+    static start() {
+        if (!instance) {
+            instance = new AddViewFeature(dom('body'));
+            instance.render();
+        }
     }
 
-    handle() {
+    create(message) {
+        publish({name: 'add', detail: message});
+    }
+
+    render() {
+        const self = this;
         const bindings = {
-            onEnterKeypress: this.create.bind(this),
-            onAddBtnClick: this.create.bind(this)
+            onEnterKeyup({key, target: {value: message}}) {
+                key.toLowerCase() === 'enter' && self.create(message);
+            },
+            onAddBtnClick() {
+                if (!self.$input) {
+                    self.$input = dom('.js-add-input')
+                }
+
+                this.create(self.$input.value);
+            }
         };
 
         render(addTpl(bindings), this.$container);
     }
 }
-
-/**
- * Factory that provides a singleton of AddViewFeature
- * @param $container        HTMLElement where the input and submit button will be injected
- * @returns AddViewFeature      instance of AddViewFeature
- */
-export const handleAddViewFeature = ($container) => {
-    if (!instance) {
-        instance = new AddViewFeature($container);
-        instance.handle();
-    }
-
-    return instance;
-};
