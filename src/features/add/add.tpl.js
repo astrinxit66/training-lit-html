@@ -5,5 +5,12 @@
  * Template of the Add feature
  *
  */
+import {html} from '../../../web_modules/lit-html.js';
 
-export const addTpl = ({onEnterKeypress, onAddBtnClick}) => console.log('Add template should be implemented here');
+export const addTpl = ({onEnterKeyup, onAddBtnClick}) => html`
+    <section class="header">
+        <h1>My awesome todos</h1>
+        <input @keyup="${onEnterKeyup}" type="text" class="js-add-input" placeholder="What needs to be done?" autofocus>
+        <button @click="${onAddBtnClick}">Add it!</button>
+    </section>
+`;
