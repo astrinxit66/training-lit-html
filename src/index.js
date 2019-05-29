@@ -5,12 +5,13 @@
  * Main entrypoint
  *
  */
-import {handleAddViewFeature} from './features/add/add.js';
-import {handleListViewFeature} from './features/list/list.js';
+import {AddViewFeature} from './features/add/add.js';
+import {ListViewFeature} from './features/list/list.js';
+import {FilterViewFeature} from './features/filter/filter.js';
 
 const dom = document.querySelector.bind(document);
 
 addEventListener('load', () => {
-    handleAddViewFeature(dom('.js-input'));
-    handleListViewFeature(dom('.js-list'));
+    const components = [AddViewFeature, ListViewFeature, FilterViewFeature];
+    components.forEach((component) => component.start());
 });
