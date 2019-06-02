@@ -6,6 +6,7 @@
  *
  */
 import {html} from '../../../web_modules/lit-html.js';
+import {dom} from '../feature.js';
 
 const headerStyle = html`
     <style>
@@ -42,19 +43,31 @@ const headerStyle = html`
             border: none;
             background-color: rgb(235, 235, 235);
             font-size: calc(var(--fontSize) * 0.8);
-            cursor: pointer;
         }
         
-        .todo-add-view button:hover {
+        .todo-add-view button:hover:not([disabled]) {
             background-color: rgb(245, 245, 245);
+            cursor: pointer;
         }
     </style>`;
 
-export const addTpl = ({onEnterKeyup, onAddBtnClick}) => html`
-    ${headerStyle}
-    <h1>My awesome todos</h1>
-    <div class="form">
-        <input @keyup="${onEnterKeyup}" type="text" class="js-add-input" placeholder="What needs to be done?" autofocus>
-        <button @click="${onAddBtnClick}">Add it!</button>
-    </div>
-`;
+export const addTpl = ({onEnterKeyup, onAddBtnClick}) => {
+  // the add button is disabled by default. This allow us to handle its state:
+  // we enable the add button if there is something into the input.
+  const _onKeyup = (e) => {
+      const isAddBtnEnabled = e.target.value.trim().length > 0;
+
+      dom('.js-add-btn')[`${isAddBtnEnabled ? 'remove' : 'set'}Attribute`]('disabled', true);
+      onEnterKeyup(e);
+  };
+
+  return html`
+      ${headerStyle}
+      <h1>My awesome todos</h1>
+          <div class="form">
+              <input @keyup="${_onKeyup}" type="text" class="js-add-input" placeholder="What needs to be done?" autofocus>
+              <button @click="${onAddBtnClick}" class="js-add-btn" disabled>Add it!</button>
+          </div>  
+      
+  `;
+};
