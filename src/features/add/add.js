@@ -27,7 +27,9 @@ export class AddViewFeature extends FeatureView {
     }
 
     create(message) {
-        publish({name: 'add', detail: message});
+        if (message.trim().length) {
+          publish({name: 'add', detail: message});
+        }
     }
 
     render() {
@@ -41,7 +43,7 @@ export class AddViewFeature extends FeatureView {
                     self.$input = dom('.js-add-input')
                 }
 
-                this.create(self.$input.value);
+                self.create(self.$input.value);
             }
         };
 

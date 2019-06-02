@@ -24,7 +24,7 @@ export class FilterViewFeature extends FeatureView {
             instance = new FilterViewFeature(dom('body'));
 
             subscribe(
-                {'list': instance.updateList.bind(this)}
+                {'list': instance.updateList.bind(instance)}
             );
 
             instance.render();
