@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <script type="module" src="index.js"></script>
     <title>My Awesome Todo list</title>
+    <style>
+        html {
+            display: flex;
+            justify-content: space-around;
+        }
+        *:focus {
+            outline: none;
+        }
+        body {
+            --fontWeight: 300;
+            --fontFamily: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            --fontSize: calc(24px + 1vw);
+
+            background-color: rgb(245, 245, 245);
+            color: rgb(77, 77, 77);
+            font-family: var(--fontFamily);
+            -webkit-font-smoothing: antialiased;
+            font-weight: var(--fontWeight);
+            width: 80%;
+        }
+    </style>
 </head>
 <body>
 
