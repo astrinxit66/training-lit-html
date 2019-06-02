@@ -4,5 +4,5 @@ module.exports = {
     server: {
         baseDir: ["./","./src"],
     },
-    browser: 'chrome'
+    browser: ['google chrome','chrome']
 };
