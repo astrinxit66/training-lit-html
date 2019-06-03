@@ -19,16 +19,20 @@ export class AddViewFeature extends FeatureView {
 
         this.setViewBindings({
             onEnterKeyup: ({key, target: {value: message}}) => {
+                this.requireInput();
                 key.toLowerCase() === 'enter' && this.create(message);
             },
             onAddBtnClick: () => {
-                if (!this.$input) {
-                    this.$input = dom('.js-add-input')
-                }
-
+                this.requireInput();
                 this.create(this.$input.value);
             }
         });
+    }
+
+    requireInput() {
+        if (!this.$input) {
+            this.$input = dom('.js-add-input');
+        }
     }
 
     static start() {
