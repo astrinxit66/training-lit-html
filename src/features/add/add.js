@@ -16,6 +16,19 @@ export class AddViewFeature extends FeatureView {
     constructor() {
         super('todo-add-view');
         this.$input = null;
+
+        this.setViewBindings({
+            onEnterKeyup: ({key, target: {value: message}}) => {
+                key.toLowerCase() === 'enter' && this.create(message);
+            },
+            onAddBtnClick: () => {
+                if (!this.$input) {
+                    this.$input = dom('.js-add-input')
+                }
+
+                this.create(this.$input.value);
+            }
+        });
     }
 
     static start() {
@@ -33,20 +46,6 @@ export class AddViewFeature extends FeatureView {
     }
 
     render() {
-        const self = this;
-        const bindings = {
-            onEnterKeyup({key, target: {value: message}}) {
-                key.toLowerCase() === 'enter' && self.create(message);
-            },
-            onAddBtnClick() {
-                if (!self.$input) {
-                    self.$input = dom('.js-add-input')
-                }
-
-                self.create(self.$input.value);
-            }
-        };
-
-        render(addTpl(bindings), this.$container);
+        render(addTpl(this.getViewBindings()), this.$container);
     }
 }
