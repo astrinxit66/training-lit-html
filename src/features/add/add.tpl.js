@@ -61,10 +61,10 @@ export const addTpl = ({onEnterKeyup, onAddBtnClick}) => {
   // the add button is disabled by default. This allow us to handle its state:
   // we enable the add button if there is something into the input.
   const _onKeyup = (e) => {
-      const isAddBtnEnabled = e.target.value.trim().length > 0;
-
-      btnSetEnabled(isAddBtnEnabled);
       onEnterKeyup(e);
+
+      const isAddBtnEnabled = e.target.value.trim().length > 0;
+      btnSetEnabled(isAddBtnEnabled);
   };
 
   const _onBtnClick = (e) => {
