@@ -5,15 +5,15 @@
  * Handle filter actions
  *
  */
-import {dom, FeatureView, publish, subscribe} from '../feature.js';
+import {FeatureView, publish, subscribe} from '../feature.js';
 
 let instance = null;
 
 export class FilterViewFeature extends FeatureView {
     static level = {all: 0, active: 1, completed: -1};
 
-    constructor(_$container) {
-        super(_$container);
+    constructor() {
+        super('list-filter-view');
 
         this.todoList = [];
         this.selectedLevel = FilterViewFeature.level.all;
@@ -21,7 +21,7 @@ export class FilterViewFeature extends FeatureView {
 
     static start() {
         if (!instance) {
-            instance = new FilterViewFeature(dom('body'));
+            instance = new FilterViewFeature();
 
             subscribe(
                 {'list': instance.updateList.bind(instance)}
