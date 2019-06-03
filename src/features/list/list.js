@@ -42,7 +42,7 @@ export class ListViewFeature extends FeatureView {
     }
 
     remove(todo) {
-        const id = this.todoList.find((_todo) => _todo === todo);
+        const id = this.todoList.indexOf(todo);
         this.todoList.splice(id, 1);
         this.render();
     }
