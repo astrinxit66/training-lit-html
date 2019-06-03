@@ -30,7 +30,7 @@ export class ListViewFeature extends FeatureView {
     }
 
     add({detail: message}) {
-        this.todoList.push({todo: message, isDone: false, isFiltered: false});
+        this.todoList.push({message, isDone: false, isFiltered: false});
         this.render();
     }
 
