@@ -1,6 +1,7 @@
 # Setup a dev environment
-- Pull the project 
-- Go to project's root folder and execute `npm install`
+- `cd` to the where you want to have the project
+- Clone this project by `git clone https://github.com/astrinxit66/training-lit-html.git`
+- Go to project's root folder (`training-lit-html` by default) and execute `npm install`
 - Execute `npm install && npx @pika/web`
 
 # Start
