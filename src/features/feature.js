@@ -29,8 +29,16 @@ export class View {
         $body.appendChild(this.$container);
     }
 
+    getViewBindings() {
+        return this._bindings;
+    }
+
     render() {
         throw new Error('Class extending View must implement its render() method');
+    }
+
+    setViewBindings(bindings) {
+        this._bindings = bindings;
     }
 }
 
