@@ -8,6 +8,8 @@
 
 export const dom = document.querySelector.bind(document);
 
+const $body = dom('body');
+
 export const subscribe = (...events) => {
     events.forEach((event) => {
         const name = Object.keys(event).pop();
@@ -20,8 +22,11 @@ export const subscribe = (...events) => {
 export const publish = ({name, detail, context = window}) => context.dispatchEvent(new CustomEvent(name, {detail}));
 
 export class View {
-    constructor(_$container) {
-        this.$container = _$container;
+    constructor(context) {
+        this.$container = document.createElement('section');
+        this.$container.classList.add(context);
+
+        $body.appendChild(this.$container);
     }
 
     render() {

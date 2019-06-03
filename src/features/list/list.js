@@ -5,21 +5,20 @@
  * Handle list view
  *
  */
-import {dom, FeatureView, publish, subscribe} from '../feature.js';
+import {FeatureView, publish, subscribe} from '../feature.js';
 
 let instance = null;
 
 export class ListViewFeature extends FeatureView {
 
-    constructor(_$container) {
-        super(_$container);
-
+    constructor() {
+        super('todo-list-view');
         this.todoList = [];
     }
 
     static start() {
         if (!instance) {
-            instance = new ListViewFeature(dom('body'));
+            instance = new ListViewFeature();
 
             subscribe(
                 {'add': instance.add.bind(instance)},

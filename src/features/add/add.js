@@ -13,15 +13,14 @@ let instance = null;
 
 export class AddViewFeature extends FeatureView {
 
-    constructor(_$container) {
-        super(_$container);
-
+    constructor() {
+        super('todo-add-view');
         this.$input = null;
     }
 
     static start() {
         if (!instance) {
-            instance = new AddViewFeature(dom('body'));
+            instance = new AddViewFeature();
             instance.render();
         }
     }
@@ -29,6 +28,7 @@ export class AddViewFeature extends FeatureView {
     create(message) {
         if (message.trim().length) {
           publish({name: 'add', detail: message});
+          this.$input.value = '';
         }
     }
 
