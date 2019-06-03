@@ -6,6 +6,8 @@
  *
  */
 import {FeatureView, publish, subscribe} from '../feature.js';
+import {listTpl} from './list.tpl.js';
+import {render} from '../../../web_modules/lit-html.js';
 
 let instance = null;
 
@@ -14,6 +16,11 @@ export class ListViewFeature extends FeatureView {
     constructor() {
         super('todo-list-view');
         this.todoList = [];
+
+        this.setViewBindings({
+            onDoneClick: this.setDone.bind(this),
+            onRemoveClick: this.remove.bind(this)
+        });
     }
 
     static start() {
@@ -43,17 +50,13 @@ export class ListViewFeature extends FeatureView {
 
     remove(todo) {
         const id = this.todoList.indexOf(todo);
+
         this.todoList.splice(id, 1);
         this.render();
     }
 
     render() {
-        console.log('Should render todo list here');
-        // render the list with ability to
-        // - mark a message as done using this.setDone()
-        // - remove a message using this.remove()
-        // - ignore message when it has isFiltered = true
-        // - stroke message and check associated checkbox when it has isDone = true
+        render(listTpl({todoList: this.todoList, ...this.getViewBindings()}), this.$container);
         publish({name: 'list', detail: this.todoList});
     }
 
