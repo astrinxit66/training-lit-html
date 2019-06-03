@@ -41,8 +41,9 @@ export class ListViewFeature extends FeatureView {
         }
     }
 
-    remove(todoId) {
-        this.todoList.splice(todoId, 1);
+    remove(todo) {
+        const id = this.todoList.find((_todo) => _todo === todo);
+        this.todoList.splice(id, 1);
         this.render();
     }
 
@@ -56,8 +57,8 @@ export class ListViewFeature extends FeatureView {
         publish({name: 'list', detail: this.todoList});
     }
 
-    setDone(todoId, isDone) {
-        this.todoList[todoId].isDone = isDone;
+    setDone(todo, isDone) {
+        todo.isDone = isDone;
         this.render();
     }
 }
