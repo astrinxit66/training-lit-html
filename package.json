@@ -20,6 +20,7 @@
     "lite-server": "2.5.3"
   },
   "dependencies": {
+    "captain-icons": "^0.2.0",
     "lit-html": "^1.1.0"
   }
 }

@@ -77,7 +77,7 @@ export const addTpl = ({onEnterKeyup, onAddBtnClick}) => {
       <h1>My awesome todos</h1>
       <div class="form">
           <input @keyup="${_onKeyup}" type="text" class="js-add-input" placeholder="What needs to be done?" autofocus>
-          <button @click="${_onBtnClick}" class="js-add-btn" disabled>Add it!</button>
+          <button @click="${_onBtnClick}" class="js-add-btn" disabled><i class="cap-icon ci-thumbs-up"></i></button>
       </div>  
   `;
 };

@@ -12,6 +12,7 @@ const listStyle = html`
         .todo-list-view { 
             background-color: rgb(255, 255, 255);
             position: relative;
+            font-family: "CaptainIcon";
         }
         .todo-list-view .done { 
             text-decoration: line-through;
@@ -31,11 +32,44 @@ const listStyle = html`
             border-bottom: 1px solid var(--borderColor);
             display: flex;
         }
+        .todo-list-view button {
+            border: none;
+            background-color: transparent;
+            font-size: 0.8em;
+            margin-right: 5px;
+            color: red;
+            opacity: 0.1;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+        .todo-list-view button:hover {
+            display: inline;
+            opacity: 1;
+        }
         .todo-list-view label {
             display: inline-block;
             padding: 15px;
             transition: color 0.4s;
             flex: 1 0 auto;
+            cursor: pointer;
+            word-spacing: -10px;
+            font-size: 0.8em;
+        }
+        .todo-list-view input {
+            display: none;
+        }
+        .todo-list-view label:before  {
+            display: inline-block;
+            content: "\\e6fd";
+            font-size: 0.7em;
+            margin-right: 15px
+        }
+        .todo-list-view input:checked + label:before  {
+            content: "\\e637";
+            color: #71CAB9;
+            text-decoration: none;
+            font-size: 0.8em;
+            margin: 0 10px 0 5px;
         }
     </style>
 `;
@@ -48,7 +82,7 @@ export const listTpl = ({todoList, onDoneClick, onRemoveClick}) => html`
                 <li>
                     <input id="todo-${index}" type="checkbox" @change="${({target: {checked}}) => onDoneClick(todo, checked)}" ?checked="${todo.isDone}">
                     <label for="todo-${index}" class="${todo.isDone ? 'done' : ''}">${todo.message}</label>
-                    <button @click="${() => onRemoveClick(todo)}">X</button>
+                    <button @click="${() => onRemoveClick(todo)}"><i class="cap-icon ci-times"></i></button>
                 </li>
             `)}
         </ul>
